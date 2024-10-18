@@ -1,5 +1,6 @@
 package com.example.recyclerview.adaptador;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,17 +47,26 @@ public class PersonaAdaptador extends RecyclerView.Adapter<PersonaAdaptador.view
     public class viewholder extends RecyclerView.ViewHolder {
         TextView txtNombre; // id del xml
         TextView txtTelefono;
+        Color color;
+        ImageView imview;
         Persona personaholder;
         public viewholder(@NonNull View itemView) {
             super(itemView);
             txtNombre = itemView.findViewById(R.id.txtNombre);
             txtTelefono = itemView.findViewById(R.id.txtTelefono);
+            imview = itemView.findViewById(R.id.imageView);
 
         }
         public void setData(Persona p){
             personaholder = p;
             txtNombre.setText(p.getNombre());
             txtTelefono.setText(p.getTelefono());
+            imview.setImageResource(p.getImagen());
+            try {
+                itemView.setBackgroundColor(Color.parseColor(personaholder.getColor()));
+            } catch (IllegalArgumentException e) {
+                itemView.setBackgroundColor(Color.LTGRAY);
+            }
         }
     }
 }
